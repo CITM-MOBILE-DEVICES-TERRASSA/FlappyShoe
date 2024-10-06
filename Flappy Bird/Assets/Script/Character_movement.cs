@@ -52,5 +52,14 @@ public class NewBehaviourScript : MonoBehaviour
         }
         spriteRenderer.sprite = sprites[spriteIndex];
     }
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Obstacle"){
+            FindObjectOfType<GameManeger>().GameOver();
+        }
+        else if(collision.gameObject.tag == "Scoring")
+        {
+            FindObjectOfType<GameManeger>().IncreaseScore();
+        }
+    }
 }
