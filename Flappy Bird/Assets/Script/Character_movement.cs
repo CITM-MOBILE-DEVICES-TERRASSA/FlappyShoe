@@ -32,6 +32,15 @@ public class NewBehaviourScript : MonoBehaviour
                 started = true;
             }
         }
+       if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if(touch.phase == TouchPhase.Began)
+            {
+                direction = Vector3.up * Jump;
+            }
+        }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
         if(!started)
