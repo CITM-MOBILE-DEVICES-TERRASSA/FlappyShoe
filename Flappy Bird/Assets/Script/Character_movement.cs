@@ -12,16 +12,26 @@ public class NewBehaviourScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
-
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private AudioClip audioClip2;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
     // Update is called once per frame
+    private void OnEnable()
+    {
+        Vector3 position = transform.position;
+        position.y = 0;
+        transform.position = position;
+        direction = Vector3.zero;
+    }
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.Space))
@@ -65,10 +75,13 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstacle"){
             FindObjectOfType<GameManeger>().GameOver();
+            audioSource.PlayOneShot(audioClip);
+
         }
         else if(collision.gameObject.tag == "Scoring")
         {
             FindObjectOfType<GameManeger>().IncreaseScore();
+            audioSource.PlayOneShot(audioClip2);
         }
     }
 }

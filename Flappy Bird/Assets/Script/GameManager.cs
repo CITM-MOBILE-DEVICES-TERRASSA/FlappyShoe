@@ -31,14 +31,11 @@ public class GameManeger : MonoBehaviour
         Time.timeScale = 1f;
         player.enabled = true;
 
-        //Pipes pipes[] = FindObjectOfType<Pipes>();
-        //for (int i = 0; i < pipes.length; i++)
-        //{
-
-        //}
-        Pipes pipes = FindObjectOfType<Pipes>();
-
-        Destroy(obj: pipes.gameObject);
+        Pipes[] pipes = FindObjectsOfType<Pipes>();
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            Destroy(pipes[i].gameObject);
+        }
     }
 
     public void Pause()
